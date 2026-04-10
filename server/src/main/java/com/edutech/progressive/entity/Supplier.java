@@ -3,7 +3,7 @@ package com.edutech.progressive.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class Supplier {
+public class Supplier implements Comparable<Supplier>{
 
     private int supplierId;
 
@@ -98,6 +98,11 @@ public class Supplier {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public int compareTo(Supplier o) {
+        return this.getSupplierName().compareTo(o.getSupplierName());
     }
 
     
