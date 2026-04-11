@@ -1,5 +1,6 @@
 package com.edutech.progressive.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,27 +9,27 @@ import com.edutech.progressive.entity.Supplier;
 public class SupplierDAOImpl implements SupplierDAO{
 
     @Override
-    public int addSupplier(Supplier supplier) {
+    public int addSupplier(Supplier supplier) throws SQLException{
         return -1;
     }
 
     @Override
-    public Supplier getSupplierById(int supplierId) {
+    public Supplier getSupplierById(int supplierId) throws SQLException{
         return null;
     }
 
     @Override
-    public void updateSupplier(Supplier supplier) {
+    public void updateSupplier(Supplier supplier) throws SQLException{
         
     }
 
     @Override
-    public void deleteSupplier(int supplierId) {
+    public void deleteSupplier(int supplierId) throws SQLException{
         
     }
 
     @Override
-    public List<Supplier> getAllSuppliers() {
+    public List<Supplier> getAllSuppliers() throws SQLException{
         return new ArrayList<>();
     }
     

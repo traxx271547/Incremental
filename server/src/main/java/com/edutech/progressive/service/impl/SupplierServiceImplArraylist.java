@@ -1,6 +1,7 @@
 package com.edutech.progressive.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.edutech.progressive.entity.Supplier;
@@ -8,19 +9,28 @@ import com.edutech.progressive.service.SupplierService;
 
 public class SupplierServiceImplArraylist  implements SupplierService{
 
+    List<Supplier> suppliers = new ArrayList<>();
+
     @Override
     public List<Supplier> getAllSuppliers() {
-        return new ArrayList<>();
+        return suppliers;
     }
 
     @Override
     public int addSupplier(Supplier supplier) {
-       return -1;
+        suppliers.add(supplier);
+        return suppliers.size();
+       
     }
 
     @Override
     public List<Supplier> getAllSuppliersSortedByName() {
-        return new ArrayList<>();
+        Collections.sort(suppliers);
+        return getAllSuppliers();
+    }
+
+    public void emptyArrayList(){
+        suppliers.clear();
     }
 
 }

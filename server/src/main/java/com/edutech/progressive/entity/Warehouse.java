@@ -3,7 +3,7 @@ package com.edutech.progressive.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class Warehouse {
+public class Warehouse implements Comparable<Warehouse>{
 
     private int warehouseId;
 
@@ -64,6 +64,11 @@ public class Warehouse {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    @Override
+    public int compareTo(Warehouse o) {
+        return Integer.compare(this.getCapacity(), o.getCapacity());
     }
 
     
