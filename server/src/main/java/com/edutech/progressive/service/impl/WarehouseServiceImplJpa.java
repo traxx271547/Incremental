@@ -1,5 +1,46 @@
 package com.edutech.progressive.service.impl;
 
-public class WarehouseServiceImplJpa  {
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.edutech.progressive.entity.Warehouse;
+import com.edutech.progressive.service.WarehouseService;
+
+public class WarehouseServiceImplJpa implements WarehouseService {
+
+    List<Warehouse> warehouses = new ArrayList<>();
+
+    @Override
+    public List<Warehouse> getAllWarehouses() throws SQLException {
+        return warehouses;
+    }
+
+    @Override
+    public int addWarehouse(Warehouse warehouse) throws SQLException {
+        return -1;
+    }
+
+    @Override
+    public List<Warehouse> getWarehousesSortedByCapacity() throws SQLException {
+        return List.of();
+    }
+
+    public void updateWarehouse(Warehouse warehouse){
+
+    }
+
+    public void deleteWarehouse(int warehouse){
+
+    }
+
+    public Warehouse getWarehouseById(int warehouseId){
+        return null;
+
+    }
+
+    public List<Warehouse> getWarehouseBySupplier(int supplierId){
+        return null;
+    }
 
 }
