@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface WarehouseService {
-    List<Warehouse> getAllWarehouses()  throws SQLException;
+    List<Warehouse> getAllWarehouses();
 
-    int addWarehouse(Warehouse warehouse)  throws SQLException;
+    int addWarehouse(Warehouse warehouse);
 
-    List<Warehouse> getWarehousesSortedByCapacity()  throws SQLException;
+    List<Warehouse> getWarehousesSortedByCapacity();
 
     default public void emptyArrayList()  throws SQLException{
     }

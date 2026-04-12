@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface SupplierService {
-    List<Supplier> getAllSuppliers()  throws SQLException;
+    List<Supplier> getAllSuppliers();
 
-    int addSupplier(Supplier supplier)  throws SQLException;
+    int addSupplier(Supplier supplier);
 
-    List<Supplier> getAllSuppliersSortedByName()  throws SQLException;
+    List<Supplier> getAllSuppliersSortedByName();
 
     default public void emptyArrayList()  throws SQLException {
     }

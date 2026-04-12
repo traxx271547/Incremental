@@ -1,40 +1,20 @@
 package com.edutech.progressive.service.impl;
 
-import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.edutech.progressive.dao.WarehouseDAO;
 import com.edutech.progressive.entity.Warehouse;
 import com.edutech.progressive.service.WarehouseService;
 
-public class WarehouseServiceImplJdbc implements WarehouseService  {
-    private WarehouseDAO warehouseDAO;
-
-    public WarehouseServiceImplJdbc(WarehouseDAO warehouseDAO) {
-        this.warehouseDAO = warehouseDAO;
-    }
+public class WarehouseServiceImplJdbc  implements  WarehouseService {
 
     @Override
     public List<Warehouse> getAllWarehouses() {
-        try {
-            return warehouseDAO.getAllWarehouse();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public int addWarehouse(Warehouse warehouse) {
-        try {
-            return warehouseDAO.addWarehouse(warehouse);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         return -1;
     }
 
