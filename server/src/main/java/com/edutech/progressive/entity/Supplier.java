@@ -41,6 +41,20 @@ public class Supplier implements Comparable<Supplier>{
         this.role = role;
     }
 
+    
+
+    public Supplier(String supplierName, String email, String phone, String address, String username, String password,
+            String role) {
+        this.supplierName = supplierName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+    
+
     public int getSupplierId() {
         return supplierId;
     }

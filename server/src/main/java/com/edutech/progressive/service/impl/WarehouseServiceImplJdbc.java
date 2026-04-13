@@ -14,17 +14,23 @@ import com.edutech.progressive.service.WarehouseService;
 
 public class WarehouseServiceImplJdbc  implements  WarehouseService {
 
-    @Autowired
+    
     private WarehouseDAO warehouseDAO;
 
-    @Override
-    public List<Warehouse> getAllWarehouses() {
-        return new ArrayList<>();
+    
+
+    public WarehouseServiceImplJdbc(WarehouseDAO warehouseDAO) {
+        this.warehouseDAO = warehouseDAO;
     }
 
     @Override
-    public int addWarehouse(Warehouse warehouse) {
-        return -1;
+    public List<Warehouse> getAllWarehouses() throws SQLException{
+        return warehouseDAO.getAllWarehouse();
+    }
+
+    @Override
+    public int addWarehouse(Warehouse warehouse) throws SQLException {
+        return warehouseDAO.addWarehouse(warehouse);
     }
 
     @Override

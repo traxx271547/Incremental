@@ -2,11 +2,13 @@ package com.edutech.progressive.controller;
 
 import com.edutech.progressive.entity.Supplier;
 import com.edutech.progressive.service.impl.SupplierServiceImplArraylist;
+import com.edutech.progressive.service.impl.SupplierServiceImplJpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +23,13 @@ public class SupplierController {
     
     @Autowired
     private SupplierServiceImplArraylist supplierServiceImplArraylist;
+
+    @Autowired
+    private SupplierServiceImplJpa supplierServiceImplJpa;
     
     @GetMapping
     public ResponseEntity<List<Supplier>> getAllSuppliers() {
-        return ResponseEntity.ok(supplierServiceImplArraylist.getAllSuppliers());
+        return ResponseEntity.ok(supplierServiceImplJpa.getAllSuppliers());
     }
     
     @GetMapping("/{supplierId}")
@@ -34,11 +39,12 @@ public class SupplierController {
 
     @PostMapping
     public ResponseEntity<Integer> addSupplier(@RequestBody Supplier supplier) {
-        return ResponseEntity.status(201).body(supplierServiceImplArraylist.addSupplier(supplier));
+        return ResponseEntity.status(201).body(supplierServiceImplJpa.addSupplier(supplier));
     }
     
     @PutMapping("/{supplierId}")
-    public ResponseEntity<Void> updateSupplier(int supplierId, Supplier supplier) {
+    public ResponseEntity<Void> updateSupplier(@PathVariable int supplierId, @RequestBody Supplier supplier) {
+        supplierServiceImplJpa.updateSupplier(supplierId,supplier);
         return ResponseEntity.ok().build();
     }
     

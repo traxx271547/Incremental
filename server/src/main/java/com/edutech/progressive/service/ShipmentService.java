@@ -8,12 +8,13 @@ import java.util.List;
 public interface ShipmentService {
     List<Shipment> getAllShipments()throws SQLException;
 
-    Shipment getShipmentById(int shipmentId)throws SQLException;
+        Shipment getShipmentById(int shipmentId)throws SQLException;
 
-    int addShipment(Shipment shipment)throws SQLException;
+            int addShipment(Shipment shipment)throws SQLException;
 
-    void updateShipment(Shipment shipment)throws SQLException;
+                void updateShipment(Shipment shipment)throws SQLException;
 
-    void deleteShipment(int shipmentId)throws SQLException;
+                    void deleteShipment(int shipmentId)throws SQLException;
 
-}
+                    }
+                    
