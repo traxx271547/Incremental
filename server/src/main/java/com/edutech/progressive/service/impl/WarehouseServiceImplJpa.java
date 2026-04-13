@@ -12,17 +12,17 @@ public class WarehouseServiceImplJpa implements WarehouseService {
     List<Warehouse> warehouses = new ArrayList<>();
 
     @Override
-    public List<Warehouse> getAllWarehouses() throws SQLException {
+    public List<Warehouse> getAllWarehouses() {
         return warehouses;
     }
 
     @Override
-    public int addWarehouse(Warehouse warehouse) throws SQLException {
+    public int addWarehouse(Warehouse warehouse) {
         return -1;
     }
 
     @Override
-    public List<Warehouse> getWarehousesSortedByCapacity() throws SQLException {
+    public List<Warehouse> getWarehousesSortedByCapacity(){
         return List.of();
     }
 

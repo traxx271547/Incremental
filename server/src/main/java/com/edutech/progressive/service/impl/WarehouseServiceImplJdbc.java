@@ -1,12 +1,21 @@
 package com.edutech.progressive.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.edutech.progressive.dao.WarehouseDAO;
 import com.edutech.progressive.entity.Warehouse;
 import com.edutech.progressive.service.WarehouseService;
 
 public class WarehouseServiceImplJdbc  implements  WarehouseService {
+
+    @Autowired
+    private WarehouseDAO warehouseDAO;
 
     @Override
     public List<Warehouse> getAllWarehouses() {
