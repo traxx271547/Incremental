@@ -1,76 +1,84 @@
 package com.edutech.progressive.jwt;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-  
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import com.edutech.progressive.entity.Supplier;
+import com.edutech.progressive.repository.SupplierRepository;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class JwtUtil {
-    private final String SECRET_KEY = "n2e9vTyAo7eqw+ZR+5WciB/PuzDDmg1lPB5f140orgs=";
+    // @Autowired
+    private SupplierRepository supplierRepository;
 
-
-   private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
-
-    // ✅ Generate Token
-    public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+    @Autowired
+    public JwtUtil(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
+    private final String secret = "secretKey000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+
+    private final int expiration = 86400;
+
+    public String generateToken(String username) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + expiration * 1000);
+        Supplier user = supplierRepository.findByUsername(username);
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("sub", username);
+
+        // Assign role based on user type
+        claims.put("role", user.getRole());
+
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(
-                        new Date(System.currentTimeMillis() + EXPIRATION_TIME)
-                )
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
-    // ✅ Extract all claims
     public Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+        Claims claims;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            claims = null;
+        }
+        return claims;
+    }
+
+    public String extractUsername(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody();
+        return claims.getSubject();
     }
 
-    // ✅ Extract username
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    // ✅ Check token expiration
     public boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        Date expirationDate = Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
+        return expirationDate.before(new Date());
     }
 
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    // ✅ Generic claim extractor
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
-    // ✅ Validate token
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }
-
-
-
