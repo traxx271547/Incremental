@@ -34,7 +34,7 @@ public class SupplierController {
     
     @GetMapping("/{supplierId}")
     public ResponseEntity<Supplier> getSupplierById(int supplierId) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(supplierServiceImplJpa.getSupplierById(supplierId));
     } 
 
     @PostMapping
